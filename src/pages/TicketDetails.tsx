@@ -22,6 +22,8 @@ import {
   XCircle
 } from 'lucide-react';
 import { format } from 'date-fns';
+import { ThemeToggle } from '@/components/ThemeToggle';
+import { AvatarImage } from '@/components/avatar';
 
 const TicketDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -55,7 +57,7 @@ const TicketDetails = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-[#0a0a0a] flex items-center justify-center">
         <Card className="border-0 shadow-xl">
           <CardContent className="p-8 text-center">
             <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
@@ -68,7 +70,7 @@ const TicketDetails = () => {
 
   if (!ticket) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-white dark:bg-[#0a0a0a] flex items-center justify-center">
         <Card className="border-0 shadow-xl">
           <CardContent className="p-8 text-center">
             <AlertCircle className="h-16 w-16 text-gray-400 mx-auto mb-4" />
@@ -130,11 +132,11 @@ const TicketDetails = () => {
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'low': return 'bg-green-100 text-green-800';
-      case 'medium': return 'bg-yellow-100 text-yellow-800';
-      case 'high': return 'bg-orange-100 text-orange-800';
-      case 'urgent': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'low': return 'bg-green-400 text-green-800';
+      case 'medium': return 'bg-yellow-400 text-yellow-800';
+      case 'high': return 'bg-orange-400 text-orange-800';
+      case 'urgent': return 'bg-red-400 text-red-800';
+      default: return 'bg-gray-400 text-gray-800';
     }
   };
 
@@ -143,35 +145,37 @@ const TicketDetails = () => {
       case 'open': return <Clock className="h-4 w-4" />;
       case 'in-progress': return <TrendingUp className="h-4 w-4" />;
       case 'resolved': return <CheckCircle className="h-4 w-4" />;
-      case 'closed': return <XCircle className="h-4 w-4" />;
+      case 'closed': return <XCircle  className="h-4 w-4" />;
       default: return <AlertCircle className="h-4 w-4" />;
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-white dark:bg-[#0a0a0a]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="flex items-center gap-4 mb-8">
+        <div className="flex items-center gap-4 mb-8 justify-between">
           <Button
             variant="ghost"
             onClick={() => navigate('/dashboard')}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 text-zinc-900 dark:text-white"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Dashboard
           </Button>
+
+          <ThemeToggle />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Ticket Info */}
-            <Card className="border-0 shadow-xl">
+            <Card className="rounded-2xl shadow-md dark:shadow-zinc-900 border-0 bg-white dark:bg-[#121214]  text-white">
               <CardHeader>
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                   <div className="flex-1">
-                    <CardTitle className="text-2xl font-bold text-gray-900 mb-2">
+                    <CardTitle className="text-2xl font-bold text-zinc-900 dark:text-white mb-2">
                       {ticket.title}
                     </CardTitle>
                     <div className="flex flex-wrap items-center gap-3">
@@ -182,7 +186,7 @@ const TicketDetails = () => {
                       <Badge className={getPriorityColor(ticket.priority)}>
                         {ticket.priority.toUpperCase()}
                       </Badge>
-                      <span className="text-sm text-gray-500 capitalize">
+                      <span className="text-sm text-zinc-400 font-semibold uppercase">
                         {ticket.category.replace('-', ' ')}
                       </span>
                     </div>
@@ -214,15 +218,15 @@ const TicketDetails = () => {
               </CardHeader>
               <CardContent>
                 <div className="prose max-w-none">
-                  <p className="text-gray-700 whitespace-pre-wrap">{ticket.description}</p>
+                  <p className="text-zinc-900 dark:text-white/70 whitespace-pre-wrap">{ticket.description}</p>
                 </div>
               </CardContent>
             </Card>
 
             {/* Comments */}
-            <Card className="border-0 shadow-xl">
+            <Card className="rounded-2xl shadow-md dark:shadow-zinc-900 border-0 bg-white dark:bg-[#121214]  text-white">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+                <CardTitle className="flex items-center gap-2 text-zinc-900 dark:text-white">
                   <MessageSquare className="h-5 w-5" />
                   Comments ({ticket.comments.length})
                 </CardTitle>
@@ -231,25 +235,26 @@ const TicketDetails = () => {
                 {ticket.comments.length === 0 ? (
                   <div className="text-center py-8">
                     <MessageSquare className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-600">No comments yet. Be the first to comment!</p>
+                    <p className="text-zinc-400 font-semibold">No comments yet. Be the first to comment!</p>
                   </div>
                 ) : (
                   <div className="space-y-4">
                     {ticket.comments.map((comment) => (
-                      <div key={comment.id} className="flex gap-4 p-4 bg-gray-50 rounded-lg">
+                      <div key={comment.id} className="flex gap-4 p-4 bg-gray-50 dark:bg-zinc-900  rounded-lg">
                         <Avatar className="h-10 w-10 flex-shrink-0">
-                          <AvatarFallback className="bg-gradient-to-r from-blue-500 to-purple-500 text-white">
+                          <AvatarImage src={user?.photoURL} alt={user.name} />
+                          <AvatarFallback className="bg-gradient-to-r  text-zinc-900 dark:text-white">
                             {comment.userName.charAt(0).toUpperCase()}
                           </AvatarFallback>
                         </Avatar>
                         <div className="flex-1">
                           <div className="flex items-center gap-2 mb-2">
-                            <span className="font-medium text-gray-900">{comment.userName}</span>
+                            <span className="font-medium text-zinc-900 dark:text-white">{comment.userName}</span>
                             <span className="text-sm text-gray-500">
                               {format(new Date(comment.createdAt), 'MMM d, yyyy at h:mm a')}
                             </span>
                           </div>
-                          <p className="text-gray-700 whitespace-pre-wrap">{comment.content}</p>
+                          <p className="text-zinc-900 dark:text-white whitespace-pre-wrap">{comment.content}</p>
                         </div>
                       </div>
                     ))}
@@ -262,19 +267,19 @@ const TicketDetails = () => {
                     value={newComment}
                     onChange={(e) => setNewComment(e.target.value)}
                     placeholder="Add a comment..."
-                    className="min-h-[100px]"
+                    className="min-h-[100px] text-zinc-900 dark:text-white"
                   />
                   <Button
                     type="submit"
                     disabled={!newComment.trim() || isSubmittingComment}
-                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                    className=""
                   >
                     {isSubmittingComment ? (
                       "Posting..."
                     ) : (
                       <>
                         <Send className="h-4 w-4 mr-2" />
-                        Post Comment
+                        Send Message
                       </>
                     )}
                   </Button>
@@ -286,7 +291,7 @@ const TicketDetails = () => {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Ticket Details */}
-            <Card className="border-0 shadow-xl">
+            <Card className="rounded-2xl shadow-md dark:shadow-zinc-900 border-0 bg-white dark:bg-[#121214]  text-zinc-900 dark:text-white">
               <CardHeader>
                 <CardTitle className="text-lg">Ticket Details</CardTitle>
               </CardHeader>
@@ -329,7 +334,7 @@ const TicketDetails = () => {
 
             {/* Quick Actions */}
             {user?.id === ticket.userId && (
-              <Card className="border-0 shadow-xl">
+              <Card className="rounded-2xl shadow-md dark:shadow-zinc-900 border-0 bg-white dark:bg-[#121214] text-zinc-900 dark:text-white">
                 <CardHeader>
                   <CardTitle className="text-lg">Quick Actions</CardTitle>
                 </CardHeader>

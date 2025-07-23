@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 export default function StatisticCard5({statsData}) {
     return (
     <div className=" w-full flex items-center justify-center p-6 lg:p-8">
-      <Card className="w-full max-w-4xl rounded-2xl shadow-md border-0 bg-white dark:bg-[#121214]  text-white">
+      <Card className="w-full max-w-4xl rounded-2xl shadow-md dark:shadow-zinc-900 border-0 bg-white dark:bg-[#121214]  text-white">
         <CardHeader className="border-0 pb-2 pt-6">
           <CardTitle className="text-lg font-semibold text-zinc-400">Total Tickets</CardTitle>
           {/* <CardToolbar> */}

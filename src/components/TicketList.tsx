@@ -67,7 +67,7 @@ export default function TicketList({
 
 
   return (
-    <div className="w-full max-w-4xl mx-auto bg-white dark:bg-[#121214] backdrop-blur-md border border-zinc-200/30 dark:border-zinc-800/30 rounded-3xl p-6 shadow-md dark:shadow-zinc-900 transition-all">
+    <div className="w-full max-w-4xl mx-auto bg-white dark:bg-[#121214] backdrop-blur-md border border-zinc-200/30 dark:border-zinc-800/30 rounded-3xl p-6 shadow-md dark:shadow-zinc-900 ">
       
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
@@ -86,7 +86,7 @@ export default function TicketList({
             {filteredTickets.map((ticket, index) => (
               <div key={index} 
                onClick={() => navigate(`/ticket/${ticket.id}`)}
-              className="flex items-start gap-3 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition cursor-pointer">
+              className="flex items-start gap-3 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800  cursor-pointer">
                 <div
                   className={cn(
                     "w-6 h-6 flex items-center justify-center rounded-full mt-1",

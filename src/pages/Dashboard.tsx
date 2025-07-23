@@ -121,7 +121,7 @@ const Dashboard = () => {
                         </Badge>
                       )}
                     </div>
-                    <p className="text-gray-600">
+                    <p className="text-zinc-400 font-semibold" >
                       Manage your support tickets and track their progress
                     </p>
                     {isPremium && user?.subscription && (
@@ -161,12 +161,12 @@ const Dashboard = () => {
 
 
               {/* SEARCH FILTER TICKETS */}
-              <Card className="w-full  max-w-4xl mx-auto bg-white dark:bg-[#121214] backdrop-blur-md border border-zinc-200/30 dark:border-zinc-800/30 rounded-2xl mb-10 shadow-md dark:shadow-zinc-900 transition-all">
+              <Card className="w-full  max-w-4xl mx-auto bg-white dark:bg-[#121214] backdrop-blur-md border border-zinc-200/30 dark:border-zinc-800/30 rounded-2xl mb-10 shadow-md dark:shadow-zinc-900 ">
                 <CardContent className="p-6">
                   <div className="flex flex-col lg:flex-row gap-4">
                     <div className="flex-1">
                       <div className="relative">
-                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4" />
                         <Input
                           placeholder="Search tickets..."
                           value={searchTerm}

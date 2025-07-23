@@ -190,6 +190,10 @@ const Payment = () => {
 
     <>
 
+    <div className='bg-white dark:bg-[#0a0a0a]'>
+
+
+
       <SidebarProvider
         style={
           {
@@ -208,7 +212,7 @@ const Payment = () => {
               <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
                 Simple, Transparent Pricing
               </h2>
-              <p className="text-muted-foreground text-lg whitespace-pre-line">
+              <p className="text-zinc-400 font-semibold text-lg whitespace-pre-line">
                 Unlock the full potential of ServiceDesk Pro with features designed to scale with your business needs.
               </p>
             </div>
@@ -228,7 +232,7 @@ const Payment = () => {
                     opacity: { duration: 0.5 },
                   }}
                   className={cn(
-                    `rounded-2xl border-[1px] p-6 bg-background text-center lg:flex lg:flex-col lg:justify-center relative`,
+                    `rounded-2xl p-6 shadow-md dark:shadow-zinc-900 border-0 bg-white dark:bg-[#121214] text-center lg:flex lg:flex-col lg:justify-center relative`,
                     plan.isPopular ? "border-green-400 border-2" : "border-border",
                     "flex flex-col",
                     !plan.isPopular && "mt-5",
@@ -248,7 +252,7 @@ const Payment = () => {
                     </div>
                   )}
                   <div className="flex-1 flex flex-col">
-                    <p className="text-base font-semibold text-muted-foreground">
+                    <p className="text-base text-zinc-400 font-semibold">
                       {plan.name}
                     </p>
                     <div className="mt-6 flex items-center justify-center gap-x-2">
@@ -256,7 +260,7 @@ const Payment = () => {
                         ₹{plan.price}
                       </span>
                       {plan.period !== "Next 3 months" && (
-                        <span className="text-sm font-semibold leading-6 tracking-wide text-muted-foreground">
+                        <span className="text-sm leading-6 tracking-wide text-zinc-400 font-semibold">
                           / {plan.period}
                         </span>
                       )}
@@ -301,7 +305,7 @@ const Payment = () => {
                     </Button>
 
 
-                    <p className="mt-6 text-xs leading-5 text-muted-foreground">
+                    <p className="mt-6 text-xs leading-5 text-zinc-400 font-semibold">
                       {plan.description}
                     </p>
                   </div>
@@ -311,7 +315,7 @@ const Payment = () => {
           </div>
         </SidebarInset>
       </SidebarProvider>
-
+    </div>
     </>
 
   );
