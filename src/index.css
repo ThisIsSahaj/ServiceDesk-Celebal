@@ -11,7 +11,10 @@ All colors MUST be HSL.
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
-    --card: 0 0% 100%;
+    --text-primary: 222.2 84% 4.9%;
+    --text-secondary: 210 40% 96.1%;
+
+    --card: #ffffff;
     --card-foreground: 222.2 84% 4.9%;
 
     --popover: 0 0% 100%;
@@ -59,7 +62,10 @@ All colors MUST be HSL.
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --text-primary: 210 40% 98%;
+    --text-secondary: 215.4 16.3% 46.9%;
+
+    --card: #121214;
     --card-foreground: 210 40% 98%;
 
     --popover: 222.2 84% 4.9%;
@@ -92,6 +98,7 @@ All colors MUST be HSL.
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
   .theme {
     --color-destructive-foreground: var(--destructive-foreground);
     --color-color-destructive-foreground: var(----color-destructive-foreground);

@@ -43,7 +43,7 @@ export function NavMain({
               <NavLink to={item.url} key={item.title} end={item.url === "/"}>
 
                 {({ isActive }) => (
-                  <SidebarMenuItem key={item.title} className={isActive ? "bg-green-100 rounded-sm" : ""}>
+                  <SidebarMenuItem key={item.title} className={isActive ? "bg-green-400 rounded-md text-white font-semibold" : ""}>
                     <SidebarMenuButton tooltip={item.title}>
                       {item.icon && <item.icon />}
                       <span>{item.title}</span>

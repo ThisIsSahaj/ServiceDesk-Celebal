@@ -26,7 +26,7 @@ import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/app-sidebar';
 import { SiteHeader } from '@/components/site-header';
 import StatisticCard5 from '@/components/StatisticCard';
-import TicketList from '@/components/TIcketList';
+import TicketList from '@/components/TicketList';
 
 
 const Dashboard = () => {
@@ -48,35 +48,6 @@ const Dashboard = () => {
     return matchesSearch && matchesStatus && matchesPriority;
   });
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'open': return 'bg-blue-100 text-blue-800 border-blue-200';
-      case 'in-progress': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'resolved': return 'bg-green-100 text-green-800 border-green-200';
-      case 'closed': return 'bg-gray-100 text-gray-800 border-gray-200';
-      default: return 'bg-gray-100 text-gray-800 border-gray-200';
-    }
-  };
-
-  const getPriorityColor = (priority: string) => {
-    switch (priority) {
-      case 'low': return 'bg-green-100 text-green-800';
-      case 'medium': return 'bg-yellow-100 text-yellow-800';
-      case 'high': return 'bg-orange-100 text-orange-800';
-      case 'urgent': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
-  };
-
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'open': return <Clock className="h-4 w-4" />;
-      case 'in-progress': return <TrendingUp className="h-4 w-4" />;
-      case 'resolved': return <CheckCircle className="h-4 w-4" />;
-      case 'closed': return <XCircle className="h-4 w-4" />;
-      default: return <AlertCircle className="h-4 w-4" />;
-    }
-  };
 
   const stats = {
     total: userTickets.length,
@@ -125,17 +96,22 @@ const Dashboard = () => {
           } as React.CSSProperties
         }
       >
-        <AppSidebar variant="inset" />
+        <AppSidebar variant="sidebar" />
         <SidebarInset>
+          {/* Site Header */}
+          <div className="md:hidden">
           <SiteHeader />
-          <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:black">
+          </div>
+
+          {/* Main Content */}
+          <div className="min-h-screen bg-white dark:bg-[#0a0a0a]">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
                 <div className="flex items-center gap-4">
                   <div>
                     <div className="flex items-center gap-3 mb-2">
-                      <h1 className="text-3xl font-bold text-gray-900">
+                      <h1 className="text-3xl font-bold text-textprimary">
                         Welcome back, {user?.name}!
                       </h1>
                       {isPremium && (
@@ -156,7 +132,7 @@ const Dashboard = () => {
                     )}
                   </div>
                 </div>
-                <div className="flex gap-3 mt-4 sm:mt-0">
+                <div className="flex gap-3 mt-4 sm:mt-0 flex-wrap justify-center">
                   {!isPremium && (
                     <Button
                       onClick={() => navigate('/payment')}
@@ -179,72 +155,13 @@ const Dashboard = () => {
                 </div>
               </div>
 
-
-              {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                <Card className="border-0 shadow-lg">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-gray-600">Total Tickets</p>
-                        <p className="text-3xl font-bold text-gray-900">{stats.total}</p>
-                      </div>
-                      <div className="bg-blue-100 p-3 rounded-full">
-                        <AlertCircle className="h-6 w-6 text-blue-600" />
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-0 shadow-lg">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-gray-600">Open</p>
-                        <p className="text-3xl font-bold text-blue-600">{stats.open}</p>
-                      </div>
-                      <div className="bg-blue-100 p-3 rounded-full">
-                        <Clock className="h-6 w-6 text-blue-600" />
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-0 shadow-lg">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-gray-600">In Progress</p>
-                        <p className="text-3xl font-bold text-yellow-600">{stats.inProgress}</p>
-                      </div>
-                      <div className="bg-yellow-100 p-3 rounded-full">
-                        <TrendingUp className="h-6 w-6 text-yellow-600" />
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-0 shadow-lg">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm font-medium text-gray-600">Resolved</p>
-                        <p className="text-3xl font-bold text-green-600">{stats.resolved}</p>
-                      </div>
-                      <div className="bg-green-100 p-3 rounded-full">
-                        <CheckCircle className="h-6 w-6 text-green-600" />
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div> */}
-
-
               {/* STATISTICS CARD */}
 
               <StatisticCard5 statsData={statsData} />
 
 
-              <Card className="border-0 shadow-lg mb-8">
+              {/* SEARCH FILTER TICKETS */}
+              <Card className="w-full  max-w-4xl mx-auto bg-white dark:bg-[#121214] backdrop-blur-md border border-zinc-200/30 dark:border-zinc-800/30 rounded-2xl mb-10 shadow-md dark:shadow-zinc-900 transition-all">
                 <CardContent className="p-6">
                   <div className="flex flex-col lg:flex-row gap-4">
                     <div className="flex-1">
@@ -254,15 +171,15 @@ const Dashboard = () => {
                           placeholder="Search tickets..."
                           value={searchTerm}
                           onChange={(e) => setSearchTerm(e.target.value)}
-                          className="pl-10"
+                          className="pl-10 bg-zinc-50 dark:bg-zinc-800/50"
                         />
                       </div>
                     </div>
                     <Select value={statusFilter} onValueChange={setStatusFilter}>
-                      <SelectTrigger className="w-full lg:w-48">
+                      <SelectTrigger className="w-full lg:w-48 bg-zinc-50 dark:bg-zinc-800/50">
                         <SelectValue placeholder="Filter by status" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className='bg-zinc-50 dark:bg-zinc-900'>
                         <SelectItem value="all">All Status</SelectItem>
                         <SelectItem value="open">Open</SelectItem>
                         <SelectItem value="in-progress">In Progress</SelectItem>
@@ -271,10 +188,10 @@ const Dashboard = () => {
                       </SelectContent>
                     </Select>
                     <Select value={priorityFilter} onValueChange={setPriorityFilter}>
-                      <SelectTrigger className="w-full lg:w-48">
+                      <SelectTrigger className="w-full lg:w-48 bg-zinc-50 dark:bg-zinc-800/50">
                         <SelectValue placeholder="Filter by priority" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className='bg-zinc-50 dark:bg-zinc-900'>
                         <SelectItem value="all">All Priority</SelectItem>
                         <SelectItem value="low">Low</SelectItem>
                         <SelectItem value="medium">Medium</SelectItem>
@@ -287,17 +204,7 @@ const Dashboard = () => {
               </Card>
 
               {/* Tickets List */}
-              <Card className="border-0 shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Filter className="h-5 w-5" />
-                    Your Tickets ({filteredTickets.length})
-                  </CardTitle>
-                  <CardDescription>
-                    Track and manage all your support tickets
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
+              
                   {filteredTickets.length === 0 ? (
                     <div className="text-center py-12">
                       <AlertCircle className="h-16 w-16 text-gray-400 mx-auto mb-4" />
@@ -318,54 +225,53 @@ const Dashboard = () => {
                       )}
                     </div>
                   ) : (
-                    <div className="space-y-4">
-                      {filteredTickets.map((ticket) => (
-                        <div
-                          key={ticket.id}
-                          className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer bg-white"
-                          onClick={() => navigate(`/ticket/${ticket.id}`)}
-                        >
-                          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-                            <div className="flex-1">
-                              <div className="flex items-center gap-3 mb-2">
-                                <h3 className="font-semibold text-gray-900 text-lg">
-                                  {ticket.title}
-                                </h3>
-                                <Badge className={getStatusColor(ticket.status)}>
-                                  {getStatusIcon(ticket.status)}
-                                  <span className="ml-1 capitalize">{ticket.status.replace('-', ' ')}</span>
-                                </Badge>
-                                <Badge className={getPriorityColor(ticket.priority)}>
-                                  {ticket.priority.toUpperCase()}
-                                </Badge>
-                              </div>
-                              <p className="text-gray-600 mb-3 line-clamp-2">
-                                {ticket.description}
-                              </p>
-                              <div className="flex items-center gap-4 text-sm text-gray-500">
-                                <div className="flex items-center gap-1">
-                                  <Calendar className="h-4 w-4" />
-                                  Created {format(new Date(ticket.createdAt), 'MMM d, yyyy')}
-                                </div>
-                                <div className="capitalize">
-                                  Category: {ticket.category.replace('-', ' ')}
-                                </div>
-                                {ticket.comments.length > 0 && (
-                                  <div>
-                                    {ticket.comments.length} comment{ticket.comments.length !== 1 ? 's' : ''}
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-
+                    // <div className="space-y-4">
+                    //   {filteredTickets.map((ticket) => (
+                    //     <div
+                    //       key={ticket.id}
+                    //       className="border border-gray-200 rounded-lg p-6 hover:shadow-md transition-shadow cursor-pointer bg-white"
+                    //       onClick={() => navigate(`/ticket/${ticket.id}`)}
+                    //     >
+                    //       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                    //         <div className="flex-1">
+                    //           <div className="flex items-center gap-3 mb-2">
+                    //             <h3 className="font-semibold text-gray-900 text-lg">
+                    //               {ticket.title}
+                    //             </h3>
+                    //             <Badge className={getStatusColor(ticket.status)}>
+                    //               {getStatusIcon(ticket.status)}
+                    //               <span className="ml-1 capitalize">{ticket.status.replace('-', ' ')}</span>
+                    //             </Badge>
+                    //             <Badge className={getPriorityColor(ticket.priority)}>
+                    //               {ticket.priority.toUpperCase()}
+                    //             </Badge>
+                    //           </div>
+                    //           <p className="text-gray-600 mb-3 line-clamp-2">
+                    //             {ticket.description}
+                    //           </p>
+                    //           <div className="flex items-center gap-4 text-sm text-gray-500">
+                    //             <div className="flex items-center gap-1">
+                    //               <Calendar className="h-4 w-4" />
+                    //               Created {format(new Date(ticket.createdAt), 'MMM d, yyyy')}
+                    //             </div>
+                    //             <div className="capitalize">
+                    //               Category: {ticket.category.replace('-', ' ')}
+                    //             </div>
+                    //             {ticket.comments.length > 0 && (
+                    //               <div>
+                    //                 {ticket.comments.length} comment{ticket.comments.length !== 1 ? 's' : ''}
+                    //               </div>
+                    //             )}
+                    //           </div>
+                    //         </div>
+                    //       </div>
+                    //     </div>
+                    //   ))}
+                    // </div>
               <TicketList filteredTickets={filteredTickets}/>
+                  )}
+
+
 
             </div>
           </div>

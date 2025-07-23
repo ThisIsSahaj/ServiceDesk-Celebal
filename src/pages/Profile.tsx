@@ -71,9 +71,11 @@ const Profile = () => {
           } as React.CSSProperties
         }
       >
-        <AppSidebar variant="inset" />
+        <AppSidebar variant="sidebar" />
         <SidebarInset>
-          <SiteHeader />
+          <div className="md:hidden">
+            <SiteHeader />
+          </div>
 
 
           <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">

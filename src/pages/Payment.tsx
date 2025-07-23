@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Button,buttonVariants } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/contexts/AuthContext';
@@ -39,7 +39,7 @@ const Payment = () => {
     {
       id: 'starter',
       name: 'Starter',
-      price: 999,
+      price: 499,
       originalPrice: 1499,
       period: 'month',
       description: 'Perfect for small teams getting started',
@@ -56,7 +56,7 @@ const Payment = () => {
     {
       id: 'professional',
       name: 'Professional',
-      price: 2999,
+      price: 2499,
       originalPrice: 4499,
       period: 'month',
       description: 'Ideal for growing businesses',
@@ -75,7 +75,7 @@ const Payment = () => {
     {
       id: 'enterprise',
       name: 'Enterprise',
-      price: 5999,
+      price: 6799,
       originalPrice: 8999,
       period: 'month',
       description: 'For large organizations with complex needs',
@@ -110,7 +110,7 @@ const Payment = () => {
     try {
       await initiatePayment({
         amount: plan.price * 100, // Convert to paise
-        name: "ServiceDesk Pro",
+        name: "ServiceDesk",
         description: `${plan.name} Plan - Monthly Subscription`,
         handler: async (response: any) => {
           try {
@@ -198,9 +198,11 @@ const Payment = () => {
           } as React.CSSProperties
         }
       >
-        <AppSidebar variant="inset" />
+        <AppSidebar variant="sidebar" />
         <SidebarInset>
-          <SiteHeader />
+          <div className="md:hidden">
+            <SiteHeader />
+          </div>
           <div className="container py-20">
             <div className="text-center space-y-4 mb-12">
               <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
@@ -251,7 +253,7 @@ const Payment = () => {
                     </p>
                     <div className="mt-6 flex items-center justify-center gap-x-2">
                       <span className="text-5xl font-bold tracking-tight text-foreground">
-                        {plan.price}
+                        ₹{plan.price}
                       </span>
                       {plan.period !== "Next 3 months" && (
                         <span className="text-sm font-semibold leading-6 tracking-wide text-muted-foreground">
