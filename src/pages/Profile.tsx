@@ -8,13 +8,14 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTickets } from '@/contexts/TicketContext';
-import { ArrowLeft, User, Mail, Calendar, Edit, Save, X, Crown, Star } from 'lucide-react';
+import { ArrowLeft, User, Mail, Calendar, Edit, Save, X, Wallet, Star } from 'lucide-react';
 import { format } from 'date-fns';
 import { toast } from '@/hooks/use-toast';
 
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/app-sidebar';
 import { SiteHeader } from '@/components/site-header';
+import { RainbowButton } from '@/components/magicui/rainbow-button';
 
 
 
@@ -50,10 +51,10 @@ const Profile = () => {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br bg-white dark:bg-[#0a0a0a] flex items-center justify-center">
         <Card className="border-0 shadow-xl">
           <CardContent className="p-8 text-center">
-            <p className="text-gray-600">Please log in to view your profile.</p>
+            <p className="text-zinc-400">Please log in to view your profile.</p>
           </CardContent>
         </Card>
       </div>
@@ -78,7 +79,7 @@ const Profile = () => {
           </div>
 
 
-          <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+          <div className="min-h-screen bg-gradient-to-br bg-white dark:bg-[#0a0a0a]">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
               {/* Header */}
               <div className="flex items-center gap-4 mb-8">
@@ -92,13 +93,13 @@ const Profile = () => {
                 </Button>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 gap-8">
                 {/* Profile Info */}
-                <div className="lg:col-span-2 space-y-6">
-                  <Card className="border-0 shadow-xl">
+                <div className="lg:col-span-2 space-y-6 ">
+                  <Card className="shadow-md dark:shadow-zinc-900 border-0 bg-white dark:bg-[#121214] text-zinc-900 dark:text-white">
                     <CardHeader>
                       <div className="flex items-center justify-between">
-                        <CardTitle className="text-2xl font-bold text-gray-900">
+                        <CardTitle className="text-2xl font-bold ">
                           Profile Information
                         </CardTitle>
                         {!isEditing ? (
@@ -156,10 +157,10 @@ const Profile = () => {
                           ) : (
                             <div>
                               <div className="flex items-center gap-3 mb-2">
-                                <h2 className="text-2xl font-bold text-gray-900">{user.name}</h2>
+                                <h2 className="text-2xl font-bold">{user.name}</h2>
                                 {isPremium && (
                                   <Badge className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white border-0">
-                                    <Crown className="h-4 w-4 mr-1" />
+                                    <Wallet className="h-4 w-4 mr-1" />
                                     {user.subscription?.planName || 'Premium'}
                                   </Badge>
                                 )}
@@ -182,34 +183,31 @@ const Profile = () => {
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="flex items-center gap-3">
-                          <div className="bg-blue-100 p-2 rounded-lg">
+                          <div className="p-2 rounded-lg">
                             <Mail className="h-5 w-5 text-blue-600" />
                           </div>
                           <div>
-                            <p className="text-sm text-gray-600">Email Address</p>
-                            <p className="font-medium text-gray-900">{user.email}</p>
+                            <p className="font-medium">{user.email}</p>
                           </div>
                         </div>
 
                         <div className="flex items-center gap-3">
-                          <div className="bg-green-100 p-2 rounded-lg">
+                          <div className="p-2 rounded-lg">
                             <Calendar className="h-5 w-5 text-green-600" />
                           </div>
                           <div>
-                            <p className="text-sm text-gray-600">Member Since</p>
-                            <p className="font-medium text-gray-900">
-                              {format(new Date(user.createdAt), 'MMMM yyyy')}
+                            <p className="font-medium">
+                             Member Since {format(new Date(user.createdAt), 'MMMM yyyy')}
                             </p>
                           </div>
                         </div>
 
                         <div className="flex items-center gap-3">
-                          <div className="bg-purple-100 p-2 rounded-lg">
+                          <div className="p-2 rounded-lg">
                             <User className="h-5 w-5 text-purple-600" />
                           </div>
                           <div>
-                            <p className="text-sm text-gray-600">User ID</p>
-                            <p className="font-medium text-gray-900 font-mono text-sm">{user.id}</p>
+                            <p className="font-medium font-mono text-sm">User ID: {user.id}</p>
                           </div>
                         </div>
                       </div>
@@ -217,190 +215,55 @@ const Profile = () => {
                   </Card>
 
                   {/* Subscription Management */}
-                  <Card className="border-0 shadow-xl">
+                  <Card className="shadow-md dark:shadow-zinc-900 border-0 bg-white dark:bg-[#121214]">
                     <CardHeader>
-                      <CardTitle className="text-xl font-bold text-gray-900 flex items-center gap-2">
-                        <Crown className="h-5 w-5 text-amber-500" />
-                        Subscription Management
+                      <CardTitle className="text-xl font-bold flex items-center gap-2">
+                        <Wallet className="h-5 w-5 text-yellow-500" />
+                        Your Subscription
                       </CardTitle>
-                      <CardDescription>
-                        Manage your ServiceDesk Pro subscription and billing
-                      </CardDescription>
                     </CardHeader>
                     <CardContent>
                       {isPremium && user?.subscription ? (
                         <div className="space-y-4">
-                          <div className="bg-gradient-to-r from-amber-50 to-yellow-50 p-6 rounded-lg border border-amber-200">
+                          <div className="p-6 rounded-md">
                             <div className="flex items-center justify-between mb-4">
                               <div>
-                                <h3 className="font-semibold text-amber-800 text-lg">
+                                <h3 className="font-semibold text-zinc-900 dark:text-white text-lg">
                                   {user.subscription.planName} Plan
                                 </h3>
-                                <p className="text-amber-700">Active Subscription</p>
+                                <p className="text-green-500">Active Subscription</p>
                               </div>
-                              <Badge className="bg-green-100 text-green-800 border-green-200">
+                              <Badge className="bg-green-500 text-zinc-900 dark:text-white">
                                 <Star className="h-4 w-4 mr-1" />
                                 Active
                               </Badge>
                             </div>
                             <div className="grid grid-cols-2 gap-4 text-sm">
                               <div>
-                                <p className="text-amber-600">Amount</p>
-                                <p className="font-semibold text-amber-800">₹{user.subscription.amount}/month</p>
+                                <p className="text-zinc-900 dark:text-white">Amount</p>
+                                <p className="font-semibold text-green-500">₹{user.subscription.amount}/month</p>
                               </div>
                               <div>
-                                <p className="text-amber-600">Started</p>
-                                <p className="font-semibold text-amber-800">
+                                <p className="text-zinc-900 dark:text-white">Started</p>
+                                <p className="font-semibold text-green-500">
                                   {format(new Date(user.subscription.startDate), 'MMM d, yyyy')}
                                 </p>
                               </div>
                             </div>
                           </div>
-                          <div className="flex gap-3">
-                            <Button
-                              variant="outline"
-                              onClick={() => navigate('/payment')}
-                              className="flex-1"
-                            >
-                              Change Plan
-                            </Button>
-                            <Button
-                              variant="outline"
-                              className="flex-1"
-                              onClick={() => toast({
-                                title: "Contact Support",
-                                description: "Please contact our support team to cancel your subscription.",
-                              })}
-                            >
-                              Manage Billing
-                            </Button>
-                          </div>
                         </div>
                       ) : (
                         <div className="text-center py-8">
-                          <Crown className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-                          <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                          
+                          <h3 className="text-lg font-semibold mb-2">
                             No Active Subscription
                           </h3>
-                          <p className="text-gray-600 mb-6">
+                          <p className="text-zinc-400 mb-6">
                             Upgrade to a premium plan to unlock advanced features and priority support
                           </p>
-                          <Button
-                            onClick={() => navigate('/payment')}
-                            className="bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600"
-                          >
-                            <Crown className="h-4 w-4 mr-2" />
-                            Upgrade to Premium
-                          </Button>
+                         <RainbowButton onClick={() => navigate('/payment')} >Upgrade to Premium</RainbowButton>
                         </div>
                       )}
-                    </CardContent>
-                  </Card>
-
-                  {/* Recent Activity */}
-                  <Card className="border-0 shadow-xl">
-                    <CardHeader>
-                      <CardTitle className="text-xl font-bold text-gray-900">
-                        Recent Ticket Activity
-                      </CardTitle>
-                      <CardDescription>
-                        Your latest support tickets and their current status
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      {userTickets.length === 0 ? (
-                        <div className="text-center py-8">
-                          <p className="text-gray-600 mb-4">No tickets created yet</p>
-                          <Button onClick={() => navigate('/create-ticket')}>
-                            Create Your First Ticket
-                          </Button>
-                        </div>
-                      ) : (
-                        <div className="space-y-4">
-                          {userTickets.slice(0, 5).map((ticket) => (
-                            <div
-                              key={ticket.id}
-                              className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
-                              onClick={() => navigate(`/ticket/${ticket.id}`)}
-                            >
-                              <div className="flex-1">
-                                <h4 className="font-medium text-gray-900">{ticket.title}</h4>
-                                <p className="text-sm text-gray-600">
-                                  Created {format(new Date(ticket.createdAt), 'MMM d, yyyy')}
-                                </p>
-                              </div>
-                              <Badge className={
-                                ticket.status === 'open' ? 'bg-blue-100 text-blue-800' :
-                                  ticket.status === 'in-progress' ? 'bg-yellow-100 text-yellow-800' :
-                                    ticket.status === 'resolved' ? 'bg-green-100 text-green-800' :
-                                      'bg-gray-100 text-gray-800'
-                              }>
-                                {ticket.status.replace('-', ' ')}
-                              </Badge>
-                            </div>
-                          ))}
-
-                          {userTickets.length > 5 && (
-                            <Button
-                              variant="outline"
-                              onClick={() => navigate('/dashboard')}
-                              className="w-full mt-4"
-                            >
-                              View All Tickets
-                            </Button>
-                          )}
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                </div>
-
-                {/* Stats Sidebar */}
-                <div className="space-y-6">
-                  <Card className="border-0 shadow-xl">
-                    <CardHeader>
-                      <CardTitle className="text-lg font-bold text-gray-900">
-                        Ticket Statistics
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="text-center p-4 bg-blue-50 rounded-lg">
-                        <div className="text-3xl font-bold text-blue-600">{stats.totalTickets}</div>
-                        <div className="text-sm text-blue-800">Total Tickets</div>
-                      </div>
-
-                      <div className="text-center p-4 bg-yellow-50 rounded-lg">
-                        <div className="text-3xl font-bold text-yellow-600">{stats.openTickets}</div>
-                        <div className="text-sm text-yellow-800">Open Tickets</div>
-                      </div>
-
-                      <div className="text-center p-4 bg-green-50 rounded-lg">
-                        <div className="text-3xl font-bold text-green-600">{stats.resolvedTickets}</div>
-                        <div className="text-sm text-green-800">Resolved Tickets</div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="border-0 shadow-xl">
-                    <CardHeader>
-                      <CardTitle className="text-lg font-bold text-gray-900">
-                        Quick Actions
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-3">
-                      <Button
-                        onClick={() => navigate('/create-ticket')}
-                        className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-                      >
-                        Create New Ticket
-                      </Button>
-                      <Button
-                        variant="outline"
-                        onClick={() => navigate('/payment')}
-                        className="w-full"
-                      >
-                        Upgrade Plan
-                      </Button>
                     </CardContent>
                   </Card>
                 </div>

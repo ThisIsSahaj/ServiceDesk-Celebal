@@ -96,14 +96,14 @@ export function HeroSection() {
                                 <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-white dark:bg-[#0a0a0a] relative mx-auto max-w-5xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
                                     <img
                                         className="bg-white dark:bg-[#0a0a0a] aspect-15/8 relative hidden rounded-2xl dark:block"
-                                        src="https://tailark.com/_next/image?url=%2Fmail2.png&w=3840&q=75"
+                                        src="/hero-dark.png"
                                         alt="app screen"
                                         width="2700"
                                         height="1440"
                                     />
                                     <img
                                         className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border dark:hidden"
-                                        src="https://tailark.com/_next/image?url=%2Fmail2-light.png&w=3840&q=75"
+                                        src="/hero-light.png"
                                         alt="app screen"
                                         width="2700"
                                         height="1440"

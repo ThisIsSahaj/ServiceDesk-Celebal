@@ -1,6 +1,6 @@
 import { TicketMinus } from "lucide-react";
 import React from "react";
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaLinkedin, FaTwitter, FaGithub,  } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 interface Footer7Props {
@@ -31,8 +31,8 @@ const defaultSections = [
   {
     title: "Product",
     links: [
-      { name: "Overview", href: "#" },
-      { name: "Pricing", href: "#" },
+      { name: "Overview", href: "/" },
+      { name: "Pricing", href: "/payment" },
       { name: "Marketplace", href: "#" },
       { name: "Features", href: "#" },
     ],
@@ -58,10 +58,9 @@ const defaultSections = [
 ];
 
 const defaultSocialLinks = [
-  { icon: <FaInstagram className="size-5" />, href: "#", label: "Instagram" },
-  { icon: <FaFacebook className="size-5" />, href: "#", label: "Facebook" },
-  { icon: <FaTwitter className="size-5" />, href: "#", label: "Twitter" },
-  { icon: <FaLinkedin className="size-5" />, href: "#", label: "LinkedIn" },
+  { icon: <FaGithub className="size-5" />, href: "https://github.com/ThisIsSahaj", label: "Github" },
+  { icon: <FaTwitter className="size-5" />, href: "https://x.com/thisissahaj", label: "Twitter" },
+  { icon: <FaLinkedin className="size-5" />, href: "https://www.linkedin.com/in/this-is-sahaj-jain/", label: "LinkedIn" },
 ];
 
 const defaultLegalLinks = [
@@ -99,7 +98,7 @@ export const Footer7 = ({
             <ul className="flex items-center space-x-6 text-muted-foreground">
               {socialLinks.map((social, idx) => (
                 <li key={idx} className="font-medium hover:text-primary">
-                  <a href={social.href} aria-label={social.label}>
+                  <a href={social.href} aria-label={social.label} target="_blank">
                     {social.icon}
                   </a>
                 </li>
