@@ -9,10 +9,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTickets, Ticket } from '@/contexts/TicketContext';
-import { 
-  ArrowLeft, 
-  Send, 
-  Clock, 
+import {
+  ArrowLeft,
+  Send,
+  Clock,
   User,
   Calendar,
   MessageSquare,
@@ -24,13 +24,14 @@ import {
 import { format } from 'date-fns';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { AvatarImage } from '@/components/avatar';
+import { RainbowButton } from '@/components/magicui/rainbow-button';
 
 const TicketDetails = () => {
   const { id } = useParams<{ id: string }>();
   const { user, isAdmin } = useAuth();
   const { getTicketById, addComment, updateTicket } = useTickets();
   const navigate = useNavigate();
-  
+
   const [ticket, setTicket] = useState<Ticket | null>(null);
   const [loading, setLoading] = useState(true);
   const [newComment, setNewComment] = useState('');
@@ -39,7 +40,7 @@ const TicketDetails = () => {
   useEffect(() => {
     const fetchTicket = async () => {
       if (!id) return;
-      
+
       setLoading(true);
       try {
         const fetchedTicket = await getTicketById(id);
@@ -91,7 +92,7 @@ const TicketDetails = () => {
     if (!newComment.trim() || !user) return;
 
     setIsSubmittingComment(true);
-    
+
     await addComment(ticket.id, {
       ticketId: ticket.id,
       userId: user.id,
@@ -99,20 +100,20 @@ const TicketDetails = () => {
       content: newComment,
       isInternal: false,
     });
-    
+
     // Refresh ticket data to show new comment
     const updatedTicket = await getTicketById(ticket.id);
     if (updatedTicket) {
       setTicket(updatedTicket);
     }
-    
+
     setNewComment('');
     setIsSubmittingComment(false);
   };
 
   const handleStatusChange = async (newStatus: string) => {
     await updateTicket(ticket.id, { status: newStatus as any });
-    
+
     // Refresh ticket data
     const updatedTicket = await getTicketById(ticket.id);
     if (updatedTicket) {
@@ -145,7 +146,7 @@ const TicketDetails = () => {
       case 'open': return <Clock className="h-4 w-4" />;
       case 'in-progress': return <TrendingUp className="h-4 w-4" />;
       case 'resolved': return <CheckCircle className="h-4 w-4" />;
-      case 'closed': return <XCircle  className="h-4 w-4" />;
+      case 'closed': return <XCircle className="h-4 w-4" />;
       default: return <AlertCircle className="h-4 w-4" />;
     }
   };
@@ -191,7 +192,7 @@ const TicketDetails = () => {
                       </span>
                     </div>
                   </div>
-                  
+
                   {isAdmin && (
                     <div className="flex gap-2">
                       {ticket.status !== 'in-progress' && (
@@ -267,7 +268,7 @@ const TicketDetails = () => {
                     value={newComment}
                     onChange={(e) => setNewComment(e.target.value)}
                     placeholder="Add a comment..."
-                    className="min-h-[100px] text-zinc-900 dark:text-white"
+                    className="min-h-[100px] text-zinc-900 dark:text-white bg-white dark:bg-zinc-900"
                   />
                   <Button
                     type="submit"
@@ -303,7 +304,7 @@ const TicketDetails = () => {
                     <p className="font-medium">{ticket.userName}</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-3">
                   <Calendar className="h-5 w-5 text-gray-400" />
                   <div>
@@ -311,7 +312,7 @@ const TicketDetails = () => {
                     <p className="font-medium">{format(new Date(ticket.createdAt), 'MMM d, yyyy')}</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-3">
                   <Clock className="h-5 w-5 text-gray-400" />
                   <div>
@@ -339,15 +340,10 @@ const TicketDetails = () => {
                   <CardTitle className="text-lg">Quick Actions</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <Button 
-                    variant="outline" 
-                    className="w-full justify-start"
-                    onClick={() => navigate('/payment')}
-                  >
-                    Upgrade Support Plan
-                  </Button>
-                  <Button 
-                    variant="outline" 
+                  <RainbowButton onClick={() => navigate('/payment')} className='w-full'>Upgrade to Premium</RainbowButton>
+
+                  <Button
+                    variant="outline"
                     className="w-full justify-start"
                     onClick={() => navigate('/create-ticket')}
                   >

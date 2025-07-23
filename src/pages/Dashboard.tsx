@@ -27,6 +27,7 @@ import { AppSidebar } from '@/components/app-sidebar';
 import { SiteHeader } from '@/components/site-header';
 import StatisticCard5 from '@/components/StatisticCard';
 import TicketList from '@/components/TicketList';
+import { RainbowButton } from '@/components/magicui/rainbow-button';
 
 
 const Dashboard = () => {
@@ -134,15 +135,7 @@ const Dashboard = () => {
                 </div>
                 <div className="flex gap-3 mt-4 sm:mt-0 flex-wrap justify-center">
                   {!isPremium && (
-                    <Button
-                      onClick={() => navigate('/payment')}
-                      variant="outline"
-                      className="border-amber-500 text-amber-600 hover:bg-amber-50"
-                    >
-                      <Crown className="h-4 w-4 mr-2" />
-                      Upgrade to Premium
-                    </Button>
-                    
+                    <RainbowButton onClick={() => navigate('/payment')}>Upgrade to Premium</RainbowButton>
                   )}
                   <Button
                         onClick={() => navigate('/create-ticket')}

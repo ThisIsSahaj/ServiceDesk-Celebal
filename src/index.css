@@ -8,9 +8,9 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* --background: 0 0% 100%; */
-    --background: #ffffff;
-    
+    --background: 0 0% 100%;
+    /* --background: #ffffff; */
+
     --foreground: 222.2 84% 4.9%;
 
     --text-primary: 222.2 84% 4.9%;
@@ -58,11 +58,21 @@ All colors MUST be HSL.
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --color-1: oklch(66.2% 0.225 25.9);
+
+    --color-2: oklch(60.4% 0.26 302);
+
+    --color-3: oklch(69.6% 0.165 251);
+
+    --color-4: oklch(80.2% 0.134 225);
+
+    --color-5: oklch(90.7% 0.231 133);
   }
 
   .dark {
-    /* --background: 222.2 84% 4.9%; */
-    --background: #0a0a0a;
+    --background: 222.2 84% 4.9%;
+    /* --background: #0a0a0a; */
     --foreground: 210 40% 98%;
 
     --text-primary: 210 40% 98%;
@@ -100,11 +110,17 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+    --color-1: oklch(66.2% 0.225 25.9);
+    --color-2: oklch(60.4% 0.26 302);
+    --color-3: oklch(69.6% 0.165 251);
+    --color-4: oklch(80.2% 0.134 225);
+    --color-5: oklch(90.7% 0.231 133);
   }
 
   .theme {
     --color-destructive-foreground: var(--destructive-foreground);
     --color-color-destructive-foreground: var(----color-destructive-foreground);
+    --animate-rainbow: rainbow var(--speed, 2s) infinite linear;
   }
 }
 
@@ -115,5 +131,19 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* ---break---
+*/
+
+@theme inline {
+  @keyframes rainbow {
+  0% {
+    background-position: 0%;
+    }
+  100% {
+    background-position: 200%;
+    }
   }
 }

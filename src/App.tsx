@@ -31,7 +31,7 @@ const App = () => (
         <BrowserRouter>
           <AuthProvider>
             <TicketProvider>
-              <div className="min-h-screen bg-background text-foreground">
+              <div className="min-h-screen bg-white dark:bg-[#0a0a0a] text-foreground">
                 {/* <Navbar /> */}
                 <Routes>
                   <Route path="/" element={<Index />} />

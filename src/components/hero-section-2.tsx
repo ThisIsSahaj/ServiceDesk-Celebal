@@ -35,7 +35,7 @@ export function HeroSection() {
             <main className="overflow-hidden">
                 <section>
                     <div className="relative pt-24">
-                        <div className="absolute inset-0 -z-10 size-full [background:radial-gradient(125%_125%_at_50%_100%,transparent_0%,var(--background)_75%)]"></div>
+                        <div className="absolute inset-0 -z-10 size-full bg-white dark:bg-[#0a0a0a]"></div>
                         <div className="mx-auto max-w-5xl px-6">
                             <div className="sm:mx-auto lg:mr-auto">
                                 <AnimatedGroup
@@ -91,11 +91,11 @@ export function HeroSection() {
                             <div className="relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20">
                                 <div
                                     aria-hidden
-                                    className="bg-gradient-to-b to-background absolute inset-0 z-10 from-transparent from-35%"
+                                    className=" absolute inset-0 z-10 from-transparent from-35%"
                                 />
-                                <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-5xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
+                                <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-white dark:bg-[#0a0a0a] relative mx-auto max-w-5xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
                                     <img
-                                        className="bg-background aspect-15/8 relative hidden rounded-2xl dark:block"
+                                        className="bg-white dark:bg-[#0a0a0a] aspect-15/8 relative hidden rounded-2xl dark:block"
                                         src="https://tailark.com/_next/image?url=%2Fmail2.png&w=3840&q=75"
                                         alt="app screen"
                                         width="2700"
@@ -113,7 +113,7 @@ export function HeroSection() {
                         </AnimatedGroup>
                     </div>
                 </section>
-                <section className="bg-background pb-16 pt-16 md:pb-32">
+                <section className="bg-white dark:bg-[#0a0a0a] pb-16 pt-16 md:pb-32">
                     <div className="group relative m-auto max-w-5xl px-6">
                         <div className="absolute inset-0 z-10 flex scale-95 items-center justify-center opacity-0 duration-500 group-hover:scale-100 group-hover:opacity-100">
                             <Link
@@ -227,7 +227,7 @@ export const HeroHeader = () => {
         <header>
             <nav
                 data-state={menuState && 'active'}
-                className={cn('group fixed z-20 w-full border-b transition-colors duration-150', scrolled && 'bg-background/50 backdrop-blur-3xl')}>
+                className={cn('group fixed z-20 w-full border-b transition-colors duration-150', scrolled && 'bg-white dark:bg-[#0a0a0a]/50 backdrop-blur-3xl')}>
                 <div className="mx-auto max-w-5xl px-6 transition-all duration-300">
                     <div className="relative flex flex-wrap items-center justify-center gap-6 py-3 lg:gap-0 lg:py-4">
                         <div className="flex w-full items-center justify-between gap-12 ">

@@ -286,7 +286,7 @@ const Payment = () => {
                         "transform-gpu ring-offset-current transition-all duration-300 ease-out hover:ring-2 hover:ring-primary hover:ring-offset-1 hover:bg-primary hover:text-primary-foreground",
                         plan.isPopular
                           ? "bg-green-400 text-primary-foreground hover:bg-green-500"
-                          : "bg-background text-foreground"
+                          : "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white  dark:hover:bg-zinc-800"
                       )}
                       disabled={isProcessing && selectedPlan === plan.id}
                       onClick={() => handlePayment(plan)}>

@@ -149,7 +149,7 @@ const Index = () => {
       <Features />
 
 {/* TESTIMONIAL SECTION */}
-      <section className="bg-background my-20 relative">
+      <section className="bg-white dark:bg-[#0a0a0a] my-20 relative">
 
         <div className="container z-10 mx-auto">
           <motion.div

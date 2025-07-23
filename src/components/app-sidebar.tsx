@@ -22,6 +22,7 @@ import {
   TicketMinus,
 } from "lucide-react"
 
+
 import { NavDocuments } from "@/components/nav-documents"
 import { NavMain } from "@/components/nav-main"
 import { NavSecondary } from "@/components/nav-secondary"
@@ -37,8 +38,9 @@ import {
 } from "@/components/ui/sidebar"
 import Payment from "@/pages/Payment"
 import { useAuth } from "@/contexts/AuthContext"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { ThemeToggle } from "./ThemeToggle"
+import { RainbowButton } from "./magicui/rainbow-button"
 
 const data = {
   navMain: [
@@ -67,7 +69,9 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
-    const { user, logout, isAuthenticated } = useAuth();  
+  const { user, logout, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
+
 
   return (
     <Sidebar collapsible="offcanvas" {...props}>
@@ -83,7 +87,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <span className="text-base font-semibold">Service Desk</span>
               </Link>
             </SidebarMenuButton>
-               <ThemeToggle />
+            <ThemeToggle />
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
@@ -91,7 +95,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navMain} user={user} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={user} logout={logout}/>
+        <RainbowButton onClick={() => navigate('/payment')}>Upgrade to Premium</RainbowButton>
+
+        <NavUser user={user} logout={logout} />
       </SidebarFooter>
     </Sidebar>
   )
